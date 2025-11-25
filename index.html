@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#050b14" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="Nexus - The Future of Social Connection" />
+    
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://picsum.photos" />
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap"></noscript>
+
+    <title>Nexus Social | Liquid Crystal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --nexus-accent: #6366f1; 
+        --nexus-accent-glow: rgba(99, 102, 241, 0.3);
+        --nexus-accent-dim: rgba(99, 102, 241, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-bg: rgba(10, 15, 30, 0.75);
+      }
+      ::selection { background: var(--nexus-accent); color: white; }
+      body {
+        font-family: 'Inter', sans-serif; background-color: #050b14; color: #f8fafc;
+        overflow: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+        overscroll-behavior-y: none; scroll-behavior: smooth;
+      }
+      h1, h2, h3, h4, button { font-family: 'Outfit', sans-serif; }
+      
+      /* Quantum Mesh Background */
+      .bg-quantum-mesh {
+        background-color: #050b14;
+        background-image: 
+          radial-gradient(at 15% 15%, hsla(253,16%,10%,1) 0, transparent 55%), 
+          radial-gradient(at 85% 0%, hsla(225,39%,15%,1) 0, transparent 55%),
+          linear-gradient(0deg, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2) 50%),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 4px 4px, 100px 100px, 100px 100px;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
+      }
+
+      /* CRT Scanline Effect */
+      .scanlines {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;
+        background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+        background-size: 100% 4px;
+        opacity: 0.15;
+      }
+
+      /* Stardust Animation */
+      .stardust {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
+        background-image: radial-gradient(white 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.1;
+        animation: starMove 100s linear infinite;
+      }
+      @keyframes starMove { from { background-position: 0 0; } to { background-position: 100px 100px; } }
+      
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.0); border-radius: 10px; transition: background 0.3s; }
+      *:hover::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); }
+      ::-webkit-scrollbar-thumb:hover { background: var(--nexus-accent); }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      .glass-panel {
+        background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+        border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s ease, box-shadow 0.3s ease;
+      }
+      .glass-panel:active { transform: scale(0.99); }
+      
+      input:focus, textarea:focus, select:focus { outline: none; border-color: var(--nexus-accent); box-shadow: 0 0 0 2px var(--nexus-accent-dim); }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+      .pt-safe { padding-top: env(safe-area-inset-top); }
+      
+      @keyframes fade-in-up { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-enter { animation: fade-in-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; will-change: transform, opacity; }
+      
+      @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+      .animate-shimmer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%); animation: shimmer 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
+      
+      @keyframes pop { 0% { transform: scale(0.9); opacity: 0.5; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+      .animate-pop { animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+      /* Glitch Effect Class */
+      .glitch-text {
+        position: relative;
+      }
+      .glitch-text::before, .glitch-text::after {
+        content: attr(data-text);
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      }
+      .glitch-text::before {
+        left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+      }
+      .glitch-text::after {
+        left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim2 5s infinite linear alternate-reverse;
+      }
+      @keyframes glitch-anim {
+        0% { clip: rect(12px, 9999px, 56px, 0); }
+        20% { clip: rect(78px, 9999px, 12px, 0); }
+        40% { clip: rect(34px, 9999px, 89px, 0); }
+        60% { clip: rect(12px, 9999px, 34px, 0); }
+        80% { clip: rect(67px, 9999px, 1px, 0); }
+        100% { clip: rect(89px, 9999px, 12px, 0); }
+      }
+      @keyframes glitch-anim2 {
+        0% { clip: rect(65px, 9999px, 12px, 0); }
+        20% { clip: rect(12px, 9999px, 56px, 0); }
+        40% { clip: rect(3px, 9999px, 1px, 0); }
+        60% { clip: rect(89px, 9999px, 34px, 0); }
+        80% { clip: rect(23px, 9999px, 78px, 0); }
+        100% { clip: rect(1px, 9999px, 12px, 0); }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
+            colors: { nexus: { bg: '#050b14', card: '#0f172a', accent: '#6366f1' } },
+            animation: { 'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite' }
+          }
+        }
+      }
+    </script>
+    <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "i18next": "https://esm.sh/i18next@23.10.0",
+    "react-i18next": "https://esm.sh/react-i18next@14.0.5?external=react,react-dom",
+    "i18next-browser-languagedetector": "https://esm.sh/i18next-browser-languagedetector@7.2.0",
+    "zustand": "https://aistudiocdn.com/zustand@^5.0.8",
+    "react-virtuoso": "https://aistudiocdn.com/react-virtuoso@^4.14.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div class="bg-quantum-mesh">
+      <div class="stardust"></div>
+    </div>
+    <div class="scanlines"></div>
+    <div id="root"></div>
+  </body>
+</html>

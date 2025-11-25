@@ -1,0 +1,8 @@
+{
+  "name": "Nexus - The Social Hybrid",
+  "description": "A conceptual social media platform merging the best of Instagram, Facebook, Twitter/X, and Discord into a single, cohesive interface powered by Gemini AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
